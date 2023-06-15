@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 13:05:24 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/06/14 13:53:27 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/06/15 13:50:22 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_philo	**ft_parser_arg(int argc, char **argv)
 	while (i <= total_philo)
 	{
 		philo[i] = malloc(sizeof(t_philo));
+		printf("creo hilo %d\n",i);
 		philo[i]->mutex = malloc(sizeof(pthread_mutex_t));
 		pthread_mutex_init(philo[i]->mutex, NULL);
 		philo[i]->fork = 1;
@@ -44,11 +45,18 @@ t_philo	**ft_parser_arg(int argc, char **argv)
 			philo[i]->to_dead = -1;
 		if (philo[i]->die <= 0 || philo[i]->eat <= 0 || philo[i]->sleep <= 0)
 			return (write(1, "ERROR[Tiempos invalidos argv[2],[3],[4]]\n", 41), NULL);
+		i++;
+	}
+	//asigno los compañeros que tiene al lado
+	i = -1;
+	while (++i <= total_philo)
+	{
+
 		if (i == total_philo)
 			philo[i]->right = philo[0];
 		else
 			philo[i]->right = philo[i + 1];
-		i++;
+		printf("El hilo %d, apunta a %d\n",i , philo[i]->right->id);
 	}
 	i = 0;
 	while (i <= total_philo)

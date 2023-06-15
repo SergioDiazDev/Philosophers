@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:50:42 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/06/14 13:24:55 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/06/15 13:57:56 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	main(int argc, char **argv)
 	}
 	else
 		return (write(1, "ERROR[Argumentos incorrectos]\n", 30));
+	while (4000)
+		;
 	return (0);
 }
 

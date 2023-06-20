@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 09:36:50 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/06/15 13:57:06 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/06/20 10:53:45 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,36 @@
 
 void	*ft_thread_philo(void *data)
 {
-	t_philo	*philo;
+	t_philo			*philo;
+	struct timeval	time;
 
 	philo = (t_philo *)data;
 	while (42)
 	{
-		printf("Entrando al hilo %d\n",philo->id);
 		pthread_mutex_lock(philo->mutex);
-		if (philo->id % 2 == 0 && philo->right->fork)
+		ft_printf("Entrando al hilo, filo:(%d)\n", philo->id);
+		if (philo->die < time.tv_usec)
+		{
+			philo->to_dead = -42;
+			ft_printf("Filo:(%d), a muerto\n", philo->id);
+		}
+		if (philo->fork && philo->right->fork)
 		{
 			philo->fork = 0;
 			philo->right->fork = 0;
-			printf("hilo %d, comiendo\n", philo->id);
+			ft_printf("hilo %d, comiendo\n", philo->id);
 			sleep(philo->eat);
 			philo->fork = 1;
 			philo->right->fork = 1;
-			pthread_mutex_unlock(philo->mutex);
+			ft_printf("hilo %d, durmiendo\n", philo->id);
+			sleep(philo->sleep);
 		}
 		else
 		{
-			printf("hilo %d, durmiendo\n", philo->id);
-			pthread_mutex_unlock(philo->mutex);
-			sleep(philo->sleep);
+			gettimeofday(&time, NULL);
+			ft_printf("filo:(%d) No tiene tenedores\n", philo->id);
 		}
+			pthread_mutex_unlock(philo->mutex);
 	}
 	return (NULL);
 }

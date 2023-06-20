@@ -1,31 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   ft_writes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/12 11:50:42 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/06/20 10:47:16 by sdiaz-ru         ###   ########.fr       */
+/*   Created: 2023/02/22 10:39:49 by sdiaz-ru          #+#    #+#             */
+/*   Updated: 2023/02/22 16:50:44 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"philo.h"
+#include "ft_printf.h"
 
-int	main(int argc, char **argv)
+void	ft_putchar(char c, int *count)
 {
-	t_philo		**philo;
-
-	if (argc == 5 || argc == 6)
-	{
-		philo = ft_parser_arg(argc, argv);
-		if (!philo)
-			return (ft_printf("ERROR[No se pudo parsear los argumentos]\n"));
-	}
-	else
-		return (ft_printf("ERROR[Argumentos incorrectos]\n"));
-	while (4000)
-		;
-	return (0);
+	write(1, &c, 1);
+	(*count)++;
 }
 
+void	ft_putstr(char *s, int *count)
+{
+	int	i;
+
+	i = 0;
+	if (s)
+	{
+		while (s[i])
+		{
+			ft_putchar(s[i], count);
+			i++;
+		}
+	}
+	else
+		ft_putstr("(null)", count);
+}
+
+void	ft_putnbr(long n, int *count)
+{
+	char		*s;
+
+	s = ft_itoa(n);
+	ft_putstr(s, count);
+	free(s);
+}

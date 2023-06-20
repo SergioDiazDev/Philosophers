@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 12:03:43 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/06/14 13:40:34 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/06/20 10:49:20 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <pthread.h>
+# include <ft_printf/ft_printf.h>
+# include <sys/time.h>
 
 typedef struct s_philo
 {

@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 13:05:24 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/06/20 13:32:41 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/06/28 13:34:35 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,24 @@ t_main	*ft_parser_arg(int argc, char **argv)
 	i = -1;
 	while (++i <= main->total_philo)
 	{
-		if (i == main->total_philo)
-			philo[i]->right = philo[0];
+		if (i == 0)
+			philo[i]->left = philo[main->total_philo];
 		else
-			philo[i]->right = philo[i + 1];
+			philo[i]->left = philo[i - 1];
+		philo[i]->right = philo[(i + 1) % (main->total_philo + 1)];
 	}
-	i = -1;
+	i = 0;
 	main->philo = philo;
-	while (++i <= main->total_philo)
+	while (i <= main->total_philo)
 	{
 		if (pthread_create(&philo[i]->thread, NULL, ft_thread_philo, (void *)philo[i]))
 			return (ft_printf("ERROR[Hilo no creado]\n"), NULL);
-		pthread_detach(philo[i]->thread);
+		//pthread_detach(philo[i]->thread);
 		philo[i]->main = main;
 		i++;
 	}
+	i = -1;
+	while (++i <= main->total_philo)
+		pthread_detach(philo[i]->thread);
 	return (main);
 }

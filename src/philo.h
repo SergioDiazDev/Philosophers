@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 12:03:43 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/06/20 13:31:40 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/06/28 12:56:05 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_philo
 	pthread_mutex_t	*mutex_philo;
 	pthread_t		thread;
 	struct s_main	*main;
+	struct s_philo	*left;
 	struct s_philo	*right;
 	int				id;
 	int				fork;

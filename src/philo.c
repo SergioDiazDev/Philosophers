@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:50:42 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/06/20 13:32:54 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/06/28 13:26:31 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ int	main(int argc, char **argv)
 	}
 	else
 		return (ft_printf("ERROR[Argumentos incorrectos]\n"));
-	while (4000)
+	while (42)
 	{
 		i = 0;
 		while (i <= main->total_philo)
 		{
 			pthread_mutex_lock(mutex);
-			ft_printf("Soy philo %d\n", main->philo[i]->id);
+			ft_printf("Soy philo[%d] %d\n", i, main->philo[i]->id);
 			if (main->to_dead == -42)
 				exit(-1);
 			pthread_mutex_unlock(mutex);

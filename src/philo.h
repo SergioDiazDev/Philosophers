@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 12:03:43 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/07/10 11:52:43 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/10 13:54:21 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ typedef struct s_main
 	int				total_eat;
 	int				total_philo;
 }t_main;
-
 
 //parser_arg.c
 t_main	*ft_parser_arg(int argc, char **argv);

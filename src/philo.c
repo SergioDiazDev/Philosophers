@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:50:42 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/07/10 13:52:39 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/10 13:59:26 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(int argc, char **argv)
 {
 	int				i;
 	t_main			*main;
-	
+
 	if (argc == 5 || argc == 6)
 	{
 		main = ft_parser_arg(argc, argv);
@@ -32,7 +32,12 @@ int	main(int argc, char **argv)
 		{
 			pthread_mutex_lock(main->mutex_main);
 			if (main->to_dead == -42)
-				exit(-1);
+			{
+				i = -1;
+				while (++i <= main->total_philo)
+					pthread_join(main->philo[i]->thread, NULL);
+				return (0);
+			}
 			pthread_mutex_unlock(main->mutex_main);
 			i++;
 		}

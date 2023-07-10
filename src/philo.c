@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:50:42 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/07/10 12:30:18 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/10 13:52:39 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,8 @@ int	main(int argc, char **argv)
 		while (i <= main->total_philo)
 		{
 			pthread_mutex_lock(main->mutex_main);
-			pthread_mutex_lock(main->philo[i]->fork);
-			ft_printf("Soy philo[%d] %d\n", i, main->philo[i]->id);
 			if (main->to_dead == -42)
 				exit(-1);
-			pthread_mutex_unlock(main->philo[i]->fork);
 			pthread_mutex_unlock(main->mutex_main);
 			i++;
 		}

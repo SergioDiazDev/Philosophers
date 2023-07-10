@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 13:05:24 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/07/10 12:43:22 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/10 13:47:40 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ t_main	*ft_parser_arg(int argc, char **argv)
 	while (i <= main->total_philo)
 	{
 		philo[i] = malloc(sizeof(t_philo));
-		ft_printf("creo hilo %d\n", i);
 		philo[i]->fork = malloc(sizeof(pthread_mutex_t));
 		pthread_mutex_init(philo[i]->fork, NULL);
 		philo[i]->count_eat = 0;
@@ -54,7 +53,6 @@ t_main	*ft_parser_arg(int argc, char **argv)
 	while (++i <= main->total_philo)
 	{
 		philo[i]->right = philo[(i + 1) % (main->total_philo + 1)];
-		printf("id:%d\n", (i + 1) % (main->total_philo + 1));
 		philo[i]->main = main;
 	}
 	i = 0;

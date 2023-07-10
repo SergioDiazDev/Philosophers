@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:50:42 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/07/10 13:59:26 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/10 16:12:40 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	main(int argc, char **argv)
 				i = -1;
 				while (++i <= main->total_philo)
 					pthread_join(main->philo[i]->thread, NULL);
+				i = 0;
 				return (0);
 			}
 			pthread_mutex_unlock(main->mutex_main);

@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 09:36:50 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/07/10 16:01:37 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/10 16:14:25 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static void	ft_routine_eat(t_philo *philo, struct timeval time)
 
 	gettimeofday(&now, NULL);
 	pthread_mutex_lock(philo->main->mutex_main);
-	ft_printf("Time: %d\t Philo: %d \t has taken a fork\n", (now.tv_usec + now.tv_sec) - (time.tv_usec + time.tv_sec), philo->id);
+	ft_printf("Time: %d\tPhilo: %d\thas taken a fork\n", (now.tv_usec + now.tv_sec) - (time.tv_usec + time.tv_sec), philo->id);
 	pthread_mutex_unlock(philo->main->mutex_main);
 	pthread_mutex_lock(philo->main->mutex_main);
-	ft_printf("Time: %d\t Philo: %d \t has taken a fork\n", (now.tv_usec + now.tv_sec) - (time.tv_usec + time.tv_sec), philo->id);
+	ft_printf("Time: %d\tPhilo: %d\tis eating\n", (now.tv_usec + now.tv_sec) - (time.tv_usec + time.tv_sec), philo->id);
 	pthread_mutex_unlock(philo->main->mutex_main);
 	pthread_mutex_lock(philo->main->mutex_main);
 	usleep(philo->main->eat);
@@ -35,13 +35,13 @@ static struct timeval	ft_routine_sleep(t_philo *philo, struct timeval time)
 
 	gettimeofday(&now, NULL);
 	pthread_mutex_lock(philo->main->mutex_main);
-	ft_printf("Time: %d\t Philo: %d \t has taken a fork\n", (now.tv_usec + now.tv_sec) - (time.tv_usec + time.tv_sec), philo->id);
+	ft_printf("Time: %d\tPhilo: %d\tis sleeping\n", (now.tv_usec + now.tv_sec) - (time.tv_usec + time.tv_sec), philo->id);
 	pthread_mutex_unlock(philo->main->mutex_main);
 	pthread_mutex_lock(philo->main->mutex_main);
 	usleep(philo->main->sleep);
 	pthread_mutex_unlock(philo->main->mutex_main);
 	pthread_mutex_lock(philo->main->mutex_main);
-	ft_printf("Time: %d\t Philo: %d \t has taken a fork\n", (now.tv_usec + now.tv_sec) - (time.tv_usec + time.tv_sec), philo->id);
+	ft_printf("Time: %d\tPhilo: %d\tis thinking\n", (now.tv_usec + now.tv_sec) - (time.tv_usec + time.tv_sec), philo->id);
 	pthread_mutex_unlock(philo->main->mutex_main);
 	gettimeofday(&now, NULL);
 	return (now);
@@ -75,7 +75,7 @@ void	*ft_thread_philo(void *data)
 			gettimeofday(&now, NULL);
 		if (philo->main->die < (now.tv_usec - time.tv_usec))
 		{
-			ft_printf("Time: %d\t Philo: %d \t has taken a fork\n", (now.tv_usec + now.tv_sec) - (time.tv_usec + time.tv_sec), philo->id);
+			ft_printf("Time: %d\t Philo: %d \t died\n", (now.tv_usec + now.tv_sec) - (time.tv_usec + time.tv_sec), philo->id);
 			philo->main->to_dead = -42;
 			pthread_mutex_unlock(philo->main->mutex_main);
 			return (NULL);

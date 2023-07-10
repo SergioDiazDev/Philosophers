@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 13:05:24 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/07/10 12:02:01 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/10 12:43:22 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_main	*ft_parser_arg(int argc, char **argv)
 	main = malloc(sizeof(t_main));
 	main->total_philo = ft_atoi(argv[1]);
 	main->mutex_main = malloc(sizeof(pthread_mutex_t));
+	pthread_mutex_init(main->mutex_main, NULL);
 	if (main->total_philo <= 0)
 		return (NULL);
 	i = 0;

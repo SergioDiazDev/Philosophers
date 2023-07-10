@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 09:36:50 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/06/28 13:33:42 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/10 12:02:48 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,22 @@ void	*ft_thread_philo(void *data)
 		//guardo el tiempo
 		gettimeofday(&time, NULL);
 		//Comprueba los tenedores como y duermo
-		if (philo->id % 2)
-			sleep(1);
-		pthread_mutex_lock(philo->mutex_philo);
-		if (philo->fork && (philo->right->fork || philo->right->fork))
-		{
-			philo->fork = 0;
-			if (philo->right->fork)
-				philo->right->fork = 0;
-			else
-				philo->right->fork = 1;
-			sleep(philo->main->eat);
-			pthread_mutex_unlock(philo->mutex_philo);
-			sleep(philo->main->sleep);
-			pthread_mutex_lock(philo->mutex_philo);
-			philo->fork = 1;
-			philo->right->fork = 1;
-			pthread_mutex_unlock(philo->mutex_philo);
-		}
+		pthread_mutex_lock(philo->fork);
+		pthread_mutex_lock(philo->right->fork);
+		sleep(philo->main->eat);
+		pthread_mutex_unlock(philo->right->fork);
+		pthread_mutex_unlock(philo->fork);
+		sleep(philo->main->sleep);
 		//Compruebo se me ha dado tiempo o he muerto
-		pthread_mutex_lock(philo->mutex_philo);
-		if (philo->main->die > time.tv_usec)
+		pthread_mutex_lock(philo->main->mutex_main);
+		ft_printf("tiempoMio%d\n", philo->main->die);
+		ft_printf("tiempo%d\n", time.tv_usec);
+		if (philo->main->die > time.tv_sec)
+		{
 			philo->main->to_dead = -42;
-		pthread_mutex_unlock(philo->mutex_philo);
+			return (NULL);
+		}
+		pthread_mutex_unlock(philo->main->mutex_main);
 	}
 	return (NULL);
 }

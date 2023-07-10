@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 13:05:24 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/06/28 13:34:35 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/10 10:46:05 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ t_main	*ft_parser_arg(int argc, char **argv)
 		else
 			philo[i]->left = philo[i - 1];
 		philo[i]->right = philo[(i + 1) % (main->total_philo + 1)];
+		philo[i]->main = main;
 	}
 	i = 0;
 	main->philo = philo;
@@ -66,7 +67,6 @@ t_main	*ft_parser_arg(int argc, char **argv)
 		if (pthread_create(&philo[i]->thread, NULL, ft_thread_philo, (void *)philo[i]))
 			return (ft_printf("ERROR[Hilo no creado]\n"), NULL);
 		//pthread_detach(philo[i]->thread);
-		philo[i]->main = main;
 		i++;
 	}
 	i = -1;

@@ -6,12 +6,11 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 09:36:50 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/07/10 16:14:25 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/13 12:24:21 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
 
 static void	ft_routine_eat(t_philo *philo, struct timeval time)
 {
@@ -20,11 +19,7 @@ static void	ft_routine_eat(t_philo *philo, struct timeval time)
 	gettimeofday(&now, NULL);
 	pthread_mutex_lock(philo->main->mutex_main);
 	ft_printf("Time: %d\tPhilo: %d\thas taken a fork\n", (now.tv_usec + now.tv_sec) - (time.tv_usec + time.tv_sec), philo->id);
-	pthread_mutex_unlock(philo->main->mutex_main);
-	pthread_mutex_lock(philo->main->mutex_main);
 	ft_printf("Time: %d\tPhilo: %d\tis eating\n", (now.tv_usec + now.tv_sec) - (time.tv_usec + time.tv_sec), philo->id);
-	pthread_mutex_unlock(philo->main->mutex_main);
-	pthread_mutex_lock(philo->main->mutex_main);
 	usleep(philo->main->eat);
 	pthread_mutex_unlock(philo->main->mutex_main);
 }
@@ -36,11 +31,7 @@ static struct timeval	ft_routine_sleep(t_philo *philo, struct timeval time)
 	gettimeofday(&now, NULL);
 	pthread_mutex_lock(philo->main->mutex_main);
 	ft_printf("Time: %d\tPhilo: %d\tis sleeping\n", (now.tv_usec + now.tv_sec) - (time.tv_usec + time.tv_sec), philo->id);
-	pthread_mutex_unlock(philo->main->mutex_main);
-	pthread_mutex_lock(philo->main->mutex_main);
 	usleep(philo->main->sleep);
-	pthread_mutex_unlock(philo->main->mutex_main);
-	pthread_mutex_lock(philo->main->mutex_main);
 	ft_printf("Time: %d\tPhilo: %d\tis thinking\n", (now.tv_usec + now.tv_sec) - (time.tv_usec + time.tv_sec), philo->id);
 	pthread_mutex_unlock(philo->main->mutex_main);
 	gettimeofday(&now, NULL);

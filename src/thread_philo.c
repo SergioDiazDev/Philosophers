@@ -6,25 +6,44 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 09:36:50 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/07/14 10:35:09 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/16 16:08:32 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static long long	timediff(struct timeval start, struct timeval end)
+{
+	long long	diff_sec;
+	long long	diff_usec;
+
+	diff_usec = (long long)(end.tv_usec - start.tv_usec);
+	diff_sec = (long long)(end.tv_sec - start.tv_sec);
+	return (diff_sec * 1000 + diff_usec / 1000);
+}
+
 
 static void	ft_routine_eat(t_philo *philo, struct timeval time)
 {
 	struct timeval	now;
 
 	//Comprueba los tenedores como y duermo
-	pthread_mutex_lock(philo->fork);
-	pthread_mutex_lock(philo->right->fork);
+	if (philo->id % 2)
+		usleep(100);
 	gettimeofday(&now, NULL);
+	pthread_mutex_lock(philo->fork);
 	pthread_mutex_lock(philo->main->mutex_main);
-	ft_printf("Time: %d\tPhilo: %d\thas taken a fork\n", (now.tv_usec + now.tv_sec) - (time.tv_usec + time.tv_sec), philo->id);
-	ft_printf("Time: %d\tPhilo: %d\tis eating\n", (now.tv_usec + now.tv_sec) - (time.tv_usec + time.tv_sec), philo->id);
+	ft_printf("Time: %d  Philo: %d  has taken self fork\n", (timediff(time, now)), philo->id);
 	pthread_mutex_unlock(philo->main->mutex_main);
-	usleep(philo->main->eat);
+	pthread_mutex_lock(philo->right->fork);
+	pthread_mutex_lock(philo->main->mutex_main);
+	ft_printf("Time: %d  Philo: %d  has taken a fork\n", timediff(time, now), philo->id);
+	ft_printf("Time: %d  Philo: %d  is eating\n", timediff(time, now), philo->id);
+	pthread_mutex_unlock(philo->main->mutex_main);
+	usleep(philo->main->eat * 1000);
+	gettimeofday(&philo->last_eat, NULL);
+	pthread_mutex_unlock(philo->fork);
+	pthread_mutex_unlock(philo->right->fork);
 }
 
 static struct timeval	ft_routine_sleep(t_philo *philo, struct timeval time)
@@ -33,23 +52,19 @@ static struct timeval	ft_routine_sleep(t_philo *philo, struct timeval time)
 
 	gettimeofday(&now, NULL);
 	pthread_mutex_lock(philo->main->mutex_main);
-	ft_printf("Time: %d\tPhilo: %d\tis sleeping\n", (now.tv_usec + now.tv_sec) - (time.tv_usec + time.tv_sec), philo->id);
+	ft_printf("Time: %d  Philo: %d  is sleeping\n", timediff(time, now), philo->id);
 	pthread_mutex_unlock(philo->main->mutex_main);
-	usleep(philo->main->sleep);
+	usleep(philo->main->sleep * 1000);
 	pthread_mutex_lock(philo->main->mutex_main);
-	ft_printf("Time: %d\tPhilo: %d\tis thinking\n", (now.tv_usec + now.tv_sec) - (time.tv_usec + time.tv_sec), philo->id);
+	ft_printf("Time: %d  Philo: %d  is thinking\n", timediff(time, now), philo->id);
 	pthread_mutex_unlock(philo->main->mutex_main);
 	gettimeofday(&now, NULL);
-	//suelto los tenedores
-	pthread_mutex_unlock(philo->right->fork);
-	pthread_mutex_unlock(philo->fork);
 	return (now);
 }
 
 void	*ft_thread_philo(void *data)
 {
 	t_philo			*philo;
-	struct timeval	init;
 	struct timeval	time;
 	struct timeval	now;
 
@@ -62,16 +77,8 @@ void	*ft_thread_philo(void *data)
 		ft_routine_eat(philo, time);
 		//rutina de dormir
 		now = ft_routine_sleep(philo, time);
-		usleep(philo->main->sleep);
 		//Compruebo si me ha dado tiempo o he muerto
 		pthread_mutex_lock(philo->main->mutex_main);
-		if (philo->main->die < (now.tv_usec + now.tv_sec) - (time.tv_usec + time.tv_sec))
-		{
-			ft_printf("Time: %d\tPhilo: %d\t died\n", (now.tv_usec + now.tv_sec) - (time.tv_usec + time.tv_sec), philo->id);
-			philo->main->to_dead = -42;
-			pthread_mutex_unlock(philo->main->mutex_main);
-			return (NULL);
-		}
 		pthread_mutex_unlock(philo->main->mutex_main);
 	}
 	return (NULL);

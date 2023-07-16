@@ -6,13 +6,13 @@
 #    By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/12 12:04:14 by sdiaz-ru          #+#    #+#              #
-#    Updated: 2023/06/20 10:44:19 by sdiaz-ru         ###   ########.fr        #
+#    Updated: 2023/07/16 11:36:46 by sdiaz-ru         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	philo
 CC				=	gcc -pthread -g3
-CFLAGS			=	-Wall -Werror -Wextra -fsanitize=thread -g
+CFLAGS			=	-Wall -Werror -Wextra -fsanitize=thread -g3
 RM				=	rm -f
 DIR_SRC			=	./src
 DIR_FT_PRINTF	=	./ft_printf

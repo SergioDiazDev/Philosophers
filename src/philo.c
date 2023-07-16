@@ -6,11 +6,19 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:50:42 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/07/13 11:41:03 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/16 16:08:56 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"philo.h"
+
+long	get_time(void)
+{
+	struct timeval	now;
+
+	gettimeofday(&now, NULL);
+	return (now.tv_sec * 1000 + now.tv_usec / 1000);
+}
 
 int	main(int argc, char **argv)
 {
@@ -31,7 +39,8 @@ int	main(int argc, char **argv)
 		while (i <= main->total_philo)
 		{
 			pthread_mutex_lock(main->mutex_main);
-			if (main->to_dead == -42)
+			
+			if (main->to_dead < (main->philo[i]->last_eat.tv_sec * 1000 - main->philo[i]->last_eat.tv_usec / 1000) - get_time())
 			{
 				// i = -1;
 				// while (++i <= main->total_philo)
@@ -45,6 +54,7 @@ int	main(int argc, char **argv)
 			pthread_mutex_unlock(main->mutex_main);
 			i++;
 		}
+		usleep(100);
 	}
 	return (0);
 }

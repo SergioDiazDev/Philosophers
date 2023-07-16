@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:50:42 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/07/16 16:08:56 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/16 17:33:25 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ long	get_time(void)
 	struct timeval	now;
 
 	gettimeofday(&now, NULL);
-	return (now.tv_sec * 1000 + now.tv_usec / 1000);
+	return ((now.tv_sec * 1000 + now.tv_usec) / 1000);
 }
 
 int	main(int argc, char **argv)
@@ -39,15 +39,9 @@ int	main(int argc, char **argv)
 		while (i <= main->total_philo)
 		{
 			pthread_mutex_lock(main->mutex_main);
-			
-			if (main->to_dead < (main->philo[i]->last_eat.tv_sec * 1000 - main->philo[i]->last_eat.tv_usec / 1000) - get_time())
+			if (main->to_dead * 1000 > (get_time() - main->philo[i]->last_eat))
 			{
-				// i = -1;
-				// while (++i <= main->total_philo)
-				// {
-				// 	printf("(%d)\n",i);
-				// 	// pthread_detach(main->philo[i]->thread);
-				// }
+				ft_printf("Time: %d  Philo: %d  is died\n", (get_time() - main->philo[i]->last_eat), main->philo[i]->id);
 				// pthread_mutex_unlock(main->mutex_main);
 				return (0);
 			}

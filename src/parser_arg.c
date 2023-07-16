@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 13:05:24 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/07/16 12:08:44 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/16 17:31:04 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,13 @@ t_main	*ft_parser_arg(int argc, char **argv)
 	i = -1;
 	while (++i <= main->total_philo)
 	{
+		philo[i]->last_eat = get_time();
 		philo[i]->right = philo[(i + 1) % (main->total_philo + 1)];
 		philo[i]->main = main;
 	}
 	i = 0;
 	main->philo = philo;
+	gettimeofday(&main->time, NULL);
 	while (i <= main->total_philo)
 	{
 		if (pthread_create(&philo[i]->thread, NULL, ft_thread_philo, (void *)philo[i]))

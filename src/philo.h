@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 12:03:43 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/07/16 16:08:41 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/16 17:32:37 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_philo
 	pthread_t		thread;
 	struct s_main	*main;
 	struct s_philo	*right;
-	struct timeval	last_eat;
+	long long		last_eat;
 	int				id;
 	int				count_eat;
 }t_philo;
@@ -35,6 +35,7 @@ typedef struct s_main
 {
 	pthread_mutex_t	*mutex_main;
 	struct s_philo	**philo;
+	struct timeval	time;
 	long long		sleep;
 	long long		die;
 	long long		eat;
@@ -49,5 +50,6 @@ t_main	*ft_parser_arg(int argc, char **argv);
 long	ft_atoi(char *str);
 //thread_philo.c
 void	*ft_thread_philo(void *data);
+long	get_time(void);
 
 #endif

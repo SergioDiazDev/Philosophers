@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 09:36:50 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/07/16 16:08:32 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/16 16:27:01 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,16 @@ static struct timeval	ft_routine_sleep(t_philo *philo, struct timeval time)
 void	*ft_thread_philo(void *data)
 {
 	t_philo			*philo;
-	struct timeval	time;
 	struct timeval	now;
 
 	//guardo el tiempo inicial
-	gettimeofday(&time, NULL);
 	philo = (t_philo *)data;
 	while (42)
 	{
 		//Rutina de commer
-		ft_routine_eat(philo, time);
+		ft_routine_eat(philo, philo->main->time);
 		//rutina de dormir
-		now = ft_routine_sleep(philo, time);
-		//Compruebo si me ha dado tiempo o he muerto
-		pthread_mutex_lock(philo->main->mutex_main);
-		pthread_mutex_unlock(philo->main->mutex_main);
+		now = ft_routine_sleep(philo, philo->main->time);
 	}
 	return (NULL);
 }

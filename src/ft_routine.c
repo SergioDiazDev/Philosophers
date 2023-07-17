@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 09:36:50 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/07/17 13:50:36 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/17 16:11:39 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ static void	ft_routine_eat(t_philo *philo, struct timeval time)
 {
 	struct timeval	now;
 
-	if (philo->id % 2)
-		usleep(100);
 	pthread_mutex_lock(philo->fork);
 	pthread_mutex_lock(philo->main->mutex_main);
 	gettimeofday(&now, NULL);

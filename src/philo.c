@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:50:42 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/07/17 13:50:06 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/17 16:07:29 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	main(int argc, char **argv)
 	}
 	else
 		return (ft_printf("ERROR[Argumentos incorrectos]\n"));
-	while (usleep(50) || !usleep(50))
+	while (m)
 	{
 		argc = -1;
 		pthread_mutex_lock(m->mutex_main);

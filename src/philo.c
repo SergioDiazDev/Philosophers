@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:50:42 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/07/17 13:10:10 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/17 13:14:58 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ static int	ft_all_eat(t_main *main)
 	}
 	return (flag);
 }
-static	void ft_leaks(void)
-{
-	system("leaks -q philo");
-}
+// static	void ft_leaks(void)
+// {
+// 	system("leaks -q philo");
+// }
 
 static int	ft_free(t_main *main)
 {
@@ -63,7 +63,6 @@ int	main(int argc, char **argv)
 {
 	t_main			*m;
 
-	atexit(ft_leaks);
 	if (argc == 5 || argc == 6)
 	{
 		m = ft_parser_arg(argc, argv, -1);

@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 12:03:43 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/07/17 13:51:45 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/17 18:07:59 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_main
 	int				total_philo;
 }t_main;
 
+void	ft_sleep(long time);
 //parser_arg.c
 t_main	*ft_parser_arg(int argc, char **argv, int i);
 //atoi.c

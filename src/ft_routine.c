@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 09:36:50 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/07/17 16:11:39 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/17 18:29:39 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ static void	ft_routine_eat(t_philo *philo, struct timeval time)
 		timediff(time, now), philo->id);
 	ft_printf("Time: %d  Philo: %d  is eating\n", \
 		timediff(time, now), philo->id);
-	usleep(philo->main->eat * 1000);
+	pthread_mutex_unlock(philo->main->mutex_main);
+	ft_sleep(philo->main->eat);
+	pthread_mutex_lock(philo->main->mutex_main);
 	philo->last_eat = get_tm();
 	philo->count_eat++;
 	pthread_mutex_unlock(philo->main->mutex_main);
@@ -56,7 +58,7 @@ static struct timeval	ft_routine_sleep(t_philo *philo, struct timeval time)
 	ft_printf("Time: %d  Philo: %d  is sleeping\n", \
 		timediff(time, now), philo->id);
 	pthread_mutex_unlock(philo->main->mutex_main);
-	usleep(philo->main->sleep * 1000);
+	ft_sleep(philo->main->sleep);
 	pthread_mutex_lock(philo->main->mutex_main);
 	gettimeofday(&now, NULL);
 	ft_printf("Time: %d  Philo: %d  is thinking\n", \

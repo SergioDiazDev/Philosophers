@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 12:03:43 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/07/17 11:32:45 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/17 13:51:45 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_main
 	pthread_mutex_t	*mutex_main;
 	struct s_philo	**philo;
 	struct timeval	time;
+	long long		time_long;
 	long long		sleep;
 	long long		die;
 	long long		eat;

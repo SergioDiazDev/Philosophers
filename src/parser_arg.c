@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 13:05:24 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/07/17 13:21:33 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/17 13:52:24 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ t_main	*ft_parser_arg(int argc, char **argv, int i)
 		return (NULL);
 	main->philo = philo;
 	gettimeofday(&main->time, NULL);
+	main->time_long = main->time.tv_sec * 1000 + main->time.tv_usec / 1000;
 	while (++i <= main->total_philo)
 	{
 		if (pthread_create(&philo[i]->thr, NULL, ft_routine, (void *)philo[i]))

@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:50:42 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/07/17 13:14:58 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/17 13:50:06 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ long	get_tm(void)
 	struct timeval	now;
 
 	gettimeofday(&now, NULL);
-	return ((now.tv_sec * 1000 + now.tv_usec) / 1000);
+	return ((now.tv_sec * 1000 + now.tv_usec / 1000));
 }
 
 static int	ft_all_eat(t_main *main)
@@ -79,7 +79,7 @@ int	main(int argc, char **argv)
 		{
 			if (m->die < (get_tm() - m->philo[argc]->last_eat))
 				return (ft_printf("Time: %d  Philo: %d  is died\n", \
-					(get_tm() - m->philo[argc]->last_eat), m->philo[argc]->id));
+					(get_tm() - m->time_long), m->philo[argc]->id));
 			else if (m->to_dead != -1 && ft_all_eat(m))
 				return (ft_printf("Todos los filosofos han comido\n"), 0);
 		}

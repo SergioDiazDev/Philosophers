@@ -6,7 +6,7 @@
 #    By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/12 12:04:14 by sdiaz-ru          #+#    #+#              #
-#    Updated: 2023/07/17 13:14:37 by sdiaz-ru         ###   ########.fr        #
+#    Updated: 2023/07/17 13:38:40 by sdiaz-ru         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ $(TRUE).SILENT:
 all: $(NAME)
 
 $(DIR_FT_PRINTF)/$(FT_PRINTF):
-	@make -C $(DIR_FT_PRINTF)
+	make -C $(DIR_FT_PRINTF)
 
 $(NAME): $(OBJS) $(DIR_FT_PRINTF)/$(FT_PRINTF)
 			$(CC) $(CFLAGS) $(OBJS) $(DIR_FT_PRINTF)/$(FT_PRINTF) -o $@

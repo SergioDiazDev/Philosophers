@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 09:36:50 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/07/17 13:08:18 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/17 13:50:36 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ static struct timeval	ft_routine_sleep(t_philo *philo, struct timeval time)
 {
 	struct timeval	now;
 
-	gettimeofday(&now, NULL);
 	pthread_mutex_lock(philo->main->mutex_main);
+	gettimeofday(&now, NULL);
 	ft_printf("Time: %d  Philo: %d  is sleeping\n", \
 		timediff(time, now), philo->id);
 	pthread_mutex_unlock(philo->main->mutex_main);

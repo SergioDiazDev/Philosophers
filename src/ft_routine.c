@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread_philo.c                                     :+:      :+:    :+:   */
+/*   ft_routine.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 09:36:50 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/07/16 16:27:01 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/17 13:08:18 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,29 @@ static long long	timediff(struct timeval start, struct timeval end)
 	return (diff_sec * 1000 + diff_usec / 1000);
 }
 
-
 static void	ft_routine_eat(t_philo *philo, struct timeval time)
 {
 	struct timeval	now;
 
-	//Comprueba los tenedores como y duermo
 	if (philo->id % 2)
 		usleep(100);
-	gettimeofday(&now, NULL);
 	pthread_mutex_lock(philo->fork);
 	pthread_mutex_lock(philo->main->mutex_main);
-	ft_printf("Time: %d  Philo: %d  has taken self fork\n", (timediff(time, now)), philo->id);
+	gettimeofday(&now, NULL);
+	ft_printf("Time: %d  Philo: %d  has taken self fork\n", \
+		(timediff(time, now)), philo->id);
 	pthread_mutex_unlock(philo->main->mutex_main);
 	pthread_mutex_lock(philo->right->fork);
 	pthread_mutex_lock(philo->main->mutex_main);
-	ft_printf("Time: %d  Philo: %d  has taken a fork\n", timediff(time, now), philo->id);
-	ft_printf("Time: %d  Philo: %d  is eating\n", timediff(time, now), philo->id);
-	pthread_mutex_unlock(philo->main->mutex_main);
+	gettimeofday(&now, NULL);
+	ft_printf("Time: %d  Philo: %d  has taken a fork\n", \
+		timediff(time, now), philo->id);
+	ft_printf("Time: %d  Philo: %d  is eating\n", \
+		timediff(time, now), philo->id);
 	usleep(philo->main->eat * 1000);
-	gettimeofday(&philo->last_eat, NULL);
+	philo->last_eat = get_tm();
+	philo->count_eat++;
+	pthread_mutex_unlock(philo->main->mutex_main);
 	pthread_mutex_unlock(philo->fork);
 	pthread_mutex_unlock(philo->right->fork);
 }
@@ -52,29 +55,27 @@ static struct timeval	ft_routine_sleep(t_philo *philo, struct timeval time)
 
 	gettimeofday(&now, NULL);
 	pthread_mutex_lock(philo->main->mutex_main);
-	ft_printf("Time: %d  Philo: %d  is sleeping\n", timediff(time, now), philo->id);
+	ft_printf("Time: %d  Philo: %d  is sleeping\n", \
+		timediff(time, now), philo->id);
 	pthread_mutex_unlock(philo->main->mutex_main);
 	usleep(philo->main->sleep * 1000);
 	pthread_mutex_lock(philo->main->mutex_main);
-	ft_printf("Time: %d  Philo: %d  is thinking\n", timediff(time, now), philo->id);
-	pthread_mutex_unlock(philo->main->mutex_main);
 	gettimeofday(&now, NULL);
+	ft_printf("Time: %d  Philo: %d  is thinking\n", \
+		timediff(time, now), philo->id);
+	pthread_mutex_unlock(philo->main->mutex_main);
 	return (now);
 }
 
-void	*ft_thread_philo(void *data)
+void	*ft_routine(void *data)
 {
 	t_philo			*philo;
-	struct timeval	now;
 
-	//guardo el tiempo inicial
 	philo = (t_philo *)data;
 	while (42)
 	{
-		//Rutina de commer
 		ft_routine_eat(philo, philo->main->time);
-		//rutina de dormir
-		now = ft_routine_sleep(philo, philo->main->time);
+		ft_routine_sleep(philo, philo->main->time);
 	}
 	return (NULL);
 }

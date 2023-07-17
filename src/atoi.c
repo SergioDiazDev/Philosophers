@@ -6,12 +6,11 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 13:17:07 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/06/12 13:53:03 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/17 11:20:52 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
 
 static int	ft_isdigit(int c)
 {

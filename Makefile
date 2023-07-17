@@ -6,19 +6,19 @@
 #    By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/12 12:04:14 by sdiaz-ru          #+#    #+#              #
-#    Updated: 2023/07/16 11:36:46 by sdiaz-ru         ###   ########.fr        #
+#    Updated: 2023/07/17 12:17:25 by sdiaz-ru         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	philo
 CC				=	gcc -pthread -g3
-CFLAGS			=	-Wall -Werror -Wextra -fsanitize=thread -g3
+CFLAGS			=	-Wall -Werror -Wextra
 RM				=	rm -f
 DIR_SRC			=	./src
 DIR_FT_PRINTF	=	./ft_printf
 FT_PRINTF		=	libftprintf.a
 INCLUDE			=	$(DIR_SRC)/philo.h
-SRC				=	$(DIR_SRC)/philo.c $(DIR_SRC)/parser_arg.c $(DIR_SRC)/atoi.c $(DIR_SRC)/thread_philo.c
+SRC				=	$(DIR_SRC)/philo.c $(DIR_SRC)/parser_arg.c $(DIR_SRC)/atoi.c $(DIR_SRC)/ft_routine.c
 # COLORS
 GREEN = `tput setaf 2`
 RED = `tput setaf 1`

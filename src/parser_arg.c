@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 13:05:24 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/07/17 17:58:12 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/17 18:45:06 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ t_main	*ft_parser_arg(int argc, char **argv, int i)
 	main->total_philo = ft_atoi(argv[1]);
 	if (main->total_philo <= 0)
 		return (NULL);
-	if (main->total_philo == 1)
-		return (ft_printf("Time: 0  Philo: 0  is died\n"), NULL);
 	philo = malloc(sizeof(t_philo *) * main->total_philo--);
 	main->die = ft_atoi(argv[2]);
 	main->eat = ft_atoi(argv[3]);

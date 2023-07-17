@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:50:42 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/07/17 18:09:19 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/17 18:34:02 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_sleep(long time)
 	start = get_tm();
 	while (get_tm() - start < time)
 	{
-		usleep(50);
+		usleep(20);
 	}
 }
 
@@ -90,7 +90,7 @@ int	main(int argc, char **argv)
 		{
 			if (m->die < (get_tm() - m->philo[argc]->last_eat))
 				return (ft_printf("Time: %d  Philo: %d  is died\n", \
-					(get_tm() - m->philo[argc]->last_eat), m->philo[argc]->id));
+					(get_tm() - m->time_long), m->philo[argc]->id));
 			else if (m->to_dead != -1 && ft_all_eat(m))
 				return (ft_printf("Todos los filosofos han comido\n"), 0);
 		}

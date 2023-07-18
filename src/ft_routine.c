@@ -6,7 +6,7 @@
 /*   By: sdiaz-ru <sdiaz-ru@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 09:36:50 by sdiaz-ru          #+#    #+#             */
-/*   Updated: 2023/07/17 18:29:39 by sdiaz-ru         ###   ########.fr       */
+/*   Updated: 2023/07/18 10:40:13 by sdiaz-ru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void	*ft_routine(void *data)
 	t_philo			*philo;
 
 	philo = (t_philo *)data;
+	if (philo->id % 2)
+		ft_sleep(50);
 	while (42)
 	{
 		ft_routine_eat(philo, philo->main->time);
